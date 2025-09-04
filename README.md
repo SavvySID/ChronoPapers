@@ -28,7 +28,9 @@ ChronoPapers solves this by leveraging **Filecoin Onchain Cloud** to provide:
 ---
 
 ## Docs
-[Notion Guide Docs](https://secret-blackberry-bc2.notion.site/ChronoPapers-263412aee10c80ad88dce2a137c46296)
+
+### - [Notion Guide Docs](https://secret-blackberry-bc2.notion.site/ChronoPapers-263412aee10c80ad88dce2a137c46296)
+### - [Project Deck](https://drive.google.com/file/d/1FLJFNDDguZP1Cks1JEfgJxgtQycIKbgk/view?usp=sharing)
 
 ## ✨ Features  
 - **Decentralized Storage** – Papers stored securely on Filecoin/IPFS.  
