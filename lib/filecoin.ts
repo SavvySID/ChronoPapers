@@ -1,4 +1,5 @@
-import { Synapse } from '@filoz/synapse-sdk'
+// Lazily import Synapse to avoid build-time issues on platforms like Vercel
+// that attempt to analyze/bundle server-only SDKs during static analysis.
 
 export interface FilecoinUploadResult {
   cid: string
@@ -15,7 +16,7 @@ export interface FilecoinDownloadResult {
 
 export class FilecoinStorage {
   private static instance: FilecoinStorage
-  private synapse: Synapse | null = null
+  private synapse: any | null = null
   private storageService: any = null
 
   constructor() {}
@@ -37,6 +38,8 @@ export class FilecoinStorage {
     }
 
     try {
+      // Dynamic import to ensure the SDK is only loaded at runtime on the server
+      const { Synapse } = await import('@filoz/synapse-sdk')
       this.synapse = await Synapse.create({
         withCDN: true,
         privateKey: privateKey,
