@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { getPrisma } from '@/lib/prisma'
 import { filecoinStorage } from '@/lib/filecoin'
 import { ApiResponse } from '@/types'
+
+// Ensure this API route runs on Node.js runtime and is not statically optimized
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
+    const prisma = getPrisma()
     const paper = await prisma.researchPaper.findUnique({
       where: { id: params.id }
     })

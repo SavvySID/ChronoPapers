@@ -1,10 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { getPrisma } from '@/lib/prisma'
 import { filecoinStorage } from '@/lib/filecoin'
 import { ResearchPaper, UploadMetadata, SearchFilters, ApiResponse } from '@/types'
 
+// Ensure this API route runs on Node.js runtime and is not statically optimized
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export async function POST(request: NextRequest) {
   try {
+    const prisma = getPrisma()
     const formData = await request.formData()
     const file = formData.get('file') as File
     const metadata = JSON.parse(formData.get('metadata') as string) as UploadMetadata

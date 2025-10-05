@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { getPrisma } from '@/lib/prisma'
 import { filecoinStorage } from '@/lib/filecoin'
 
 // Ensure this API route runs on Node.js runtime and is not statically optimized
@@ -13,6 +13,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    const prisma = getPrisma()
     const paper = await prisma.researchPaper.findUnique({
       where: { id: params.id }
     })
